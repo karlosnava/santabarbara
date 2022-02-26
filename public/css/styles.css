@@ -1,0 +1,79 @@
+:root {
+  --primary-color: #007bff;
+  --red-color: #ed3237;
+}
+
+.red-color{
+  color: var(--red-color);
+}
+
+input:focus {
+  outline-style: none;
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.roboto-400{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 400;
+}
+
+.roboto-500{
+  font-family: 'Roboto', sans-serif;
+  font-weight: 500;
+}
+
+p, .f-montserrat{
+  font-family: 'Montserrat', sans-serif;
+}
+
+
+/*INPUTS*/
+.inp {
+  font-size: 18px;
+  background: rgba(0, 0, 0, .08);
+  color: rgba(0, 0, 0, .9);
+  border-bottom: 3px solid rgba(0, 0, 0, .08);
+  transition: .1s ease-in-out;
+}
+
+.inp:focus,
+.inp:hover {
+  background: rgba(0, 0, 0, .1);
+}
+
+.inp:focus {
+  border-bottom: 3px solid var(--primary-color);
+}
+
+.inp:not(:placeholder-shown) + .inp-label {
+  position: absolute;
+  font-size: 13px;
+  left: 20px;
+  top: 10px;
+  pointer-events: none;
+  color: var(--primary-color);
+  transition: .1s ease-in-out;
+  opacity: .8;
+}
+
+.inp-label {
+  position: absolute;
+  font-size: 17px;
+  left: 20px;
+  top: 22px;
+  pointer-events: none;
+  color: rgba(0, 0, 0, .6);
+  transition: .1s ease-in-out;
+}
+
+.inp:focus + .inp-label {
+  top: 10px;
+  font-size: 13px;
+  color: var(--primary-color);
+}
+
+/*INPUT NIVALID*/
+.inp.inp-error{
+  border-bottom: 3px solid var(--red-color);
+}

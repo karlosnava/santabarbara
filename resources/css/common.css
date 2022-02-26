@@ -1,0 +1,30 @@
+.container{
+	@apply w-full p-3 mx-auto;
+}
+
+/* SM */
+@media (min-width: 640px) {
+	.container{
+		@apply p-0 w-11/12;
+	}
+}
+
+/* MD  */
+@media (min-width: 768px) {
+	.container{
+		@apply w-10/12;
+	}
+}
+
+/* LG */
+@media (min-width: 1024px) {
+	.container{
+		@apply w-9/12;
+	}
+}
+
+/* XL */
+@media (min-width: 1280px) {  }
+
+/* 2XL */
+@media (min-width: 1536px) {  }
