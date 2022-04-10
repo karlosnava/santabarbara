@@ -7,7 +7,7 @@
         @endif
         relative swiper-slide shadow-lg rounded-lg bg-cover bg-center w-full"
 
-        style="height: 300px; background-image: linear-gradient(to top, rgba(0, 0, 0, .3) 50%, transparent), url({{ Storage::url($banner->image); }});">
+        style="height: 300px; background-image: linear-gradient(to top, rgba(0, 0, 0, .3) 50%, transparent), url({{ Storage::url($banner->image) }});">
       	<div class="absolute bottom-10 left-10 text-white w-5/6 md:left-16">
       		@if($banner->priority == "highlight")
             <span class="text-white bg-orange-500 rounded-full text-sm">
