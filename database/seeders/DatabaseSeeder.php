@@ -13,19 +13,20 @@ class DatabaseSeeder extends Seeder
         Storage::deleteDirectory('posts');
         Storage::makeDirectory('posts');
 
-        Storage::deleteDirectory('news');
-        Storage::makeDirectory('news');
+        Storage::deleteDirectory('images');
+        Storage::makeDirectory('images');
+        Storage::makeDirectory('images/sede-a');
+        Storage::makeDirectory('images/sede-b');
+        Storage::makeDirectory('images/sede-c');
 
         Storage::deleteDirectory('banners');
         Storage::makeDirectory('banners');
-        
-        /*
-        Storage::deleteDirectory('podcasts');
-        Storage::makeDirectory('podcasts');
-        */
 
         Storage::deleteDirectory('newsletters');
         Storage::makeDirectory('newsletters');
+
+        Storage::deleteDirectory('projects');
+        Storage::makeDirectory('projects');
 
         \App\Models\User::factory(1)->create();
         

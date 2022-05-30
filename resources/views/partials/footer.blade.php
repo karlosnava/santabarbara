@@ -2,7 +2,7 @@
 	<div class="container grid grid-cols-10 gap-10 divide-x py-10">
 		<div class="col-span-10 md:col-span-5 px-10 md:p-0">
 			<div class="flex items-center justify-center md:justify-start">
-				<img src="{{ asset(config('settings.page_icon')) }}" class="w-12" alt="{{ config('settings.app_name') }}">
+				<img src="{{ Storage::url(config('settings.page_icon')) }}" class="w-12" alt="{{ config('settings.app_name') }}">
 				<h2 class="text-lg ml-3 roboto-500 text-gray-800">{{ config('settings.app_name') }}</h2>
 			</div>
 			<p class="text-sm text-gray-600 text-justify mt-6">{{ config('settings.site_description') }}</p>

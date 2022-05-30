@@ -9,7 +9,7 @@
 <nav class="shadow-md bg-white mb-5">
 	<div class="flex items-center md:block md:grid md:grid-cols-2 container py-2 flex items-center justify-between">
 		<div class="flex items-center">		
-			<a href="/"><img src="{{ asset(config('settings.page_icon')) }}" class="w-10 md:w-12" alt="{{ config('settings.app_name') }}"></a>
+			<a href="/"><img src="{{ Storage::url(config('settings.page_icon')) }}" class="w-10 md:w-12" alt="{{ config('settings.app_name') }}"></a>
 			<a href="/"><h1 class="text-sm line-clamp-1 ml-3 roboto-500 text-gray-800 md:text-lg"> | {{ config('settings.app_name') }}</h1></a>
 		</div>
 

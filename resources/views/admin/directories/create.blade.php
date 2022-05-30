@@ -1,11 +1,9 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-	<div class="mb-3">
-		<a href="{{ route('admin.directories.index') }}" class="text-sky-500"><i class="fas fa-arrow-left"></i> Regresar</a>
-	</div>
-	<div class="flex items-center justify-between mb-10">
-		<h1 class="text-2xl font-bold f-montserrat text-gray-700">Crear directorio</h1>
+	<div class="py-3">
+		<a href="{{ route('admin.directories.index') }}"><i class="fas fa-arrow-left"></i> Regresar</a>
+		<h1 class="text-secondary">Crear directorio</h1>
 	</div>
 
 	<div>
@@ -13,9 +11,9 @@
 		
 			@include('admin.directories.form')
 
-			<hr class="my-8">
-			<div class="flex items-center justify-end" x-data="{ submited : false }">
-				<x-form.button x-bind:disabled="submited" x-on:click="submited = true" type="submit" bg="bg-sky-500" text="Crear directorio" />
+			<hr class="my-4">
+			<div class="d-flex align-items-center justify-content-end" x-data="{ submited : false }">
+				<button x-bind:disabled="submited" x-on:click="submited = true" type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Crear directorio</button>
 			</div>
 
 		{!! Form::close() !!}

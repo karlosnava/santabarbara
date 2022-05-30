@@ -1,21 +1,20 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-	<div class="mb-3">
-		<a href="{{ route('admin.directories.show', $directory) }}" class="text-sky-500"><i class="fas fa-arrow-left"></i> Regresar</a>
+	<div class="py-3">
+		<a href="{{ route('admin.directories.show', $directory) }}"><i class="fas fa-arrow-left"></i> Regresar</a>
 	</div>
-	<div class="flex items-center justify-between mb-10">
-		<h1 class="text-2xl font-bold f-montserrat text-gray-700">Añadir archivo a {{ $directory->name }}</h1>
-	</div>
+
+	<h3 class="font-weight-bold pb-3">Añadir archivo <small class="text-secondary mx-1"><i class="fas fa-arrow-right"></i></small> {{ $directory->name }}</h3>
 
 	<div>
 		{!! Form::open(['route' => ['admin.newsletters.store', $directory], 'files' => true]) !!}
 		
 			@include('admin.newsletters.form')
 
-			<hr class="my-8">
-			<div class="flex items-center justify-end" x-data="{ submited : false }">
-				<x-form.button x-bind:disabled="submited" x-on:click="submited = true" type="submit" bg="bg-sky-500" text="Añadir archivo" />
+			<hr class="my-3">
+			<div class="d-flex align-items-center justify-content-end" x-data="{ submited : false }">
+				<button x-bind:disabled="submited" x-on:click="submited = true" type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Añadir archivo</button>
 			</div>
 
 		{!! Form::close() !!}
