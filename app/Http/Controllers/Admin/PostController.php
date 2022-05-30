@@ -15,30 +15,30 @@ class PostController extends Controller
 {
     public function index()
     {
-        $posts = Post::where('status', '<>', 'forgotten')->orderBy('id', 'desc')->paginate(10);
-        return view('admin.posts.index', compact('posts'));
+        // $posts = Post::where('status', '<>', 'forgotten')->orderBy('id', 'desc')->paginate(10);
+        // return view('admin.posts.index', compact('posts'));
     }
 
-    public function create()
+    public function create(Location $location)
     {
         $sedes = Location::pluck('name', 'id');
-        return view('admin.posts.create', compact('sedes'));
+        return view('admin.posts.create', compact('sedes', 'location'));
     }
 
-    public function store(Request $request)
+    public function store(Request $request, Location $location)
     {
         $request->validate([
             'title'       => ['bail', 'required', 'string', 'min:5', 'max:50'],
             'slug'        => ['bail', 'required', 'string', 'min:5', 'max:100', "unique:posts,slug"],
-            'extract'     => ['bail', 'required', 'min:10', 'max:200'],
+            'extract'     => ['bail', 'required', 'min:10'],
             'description' => ['bail', 'required', 'min:10'],
             'status'      => ['bail', 'required', 'string', 'in:active,draft,forgotten'],
             'images'      => ['bail', 'required']
         ]);
 
-
         $requestData = $request->all();
         $requestData['user_id'] = auth()->user()->id;
+        $requestData['location_id'] = $location->id;
         $post = Post::create($requestData);
 
         foreach ($request->file('images') as $image) {
@@ -49,40 +49,38 @@ class PostController extends Controller
             ]);
         }
 
-        return redirect()->route('admin.posts.show', $post)->with('info', 'Publicación creada correctamente.');
+        return redirect()->route('admin.posts.show', [$location, $post])->with('info', 'Publicación creada correctamente.');
     }
 
-    public function show(Post $post)
+    public function show(Location $location, Post $post)
     {
         $post = Post::findOrFail($post->id);
-        return view('admin.posts.show', compact('post'));
+        return view('admin.posts.show', compact('location', 'post'));
     }
 
-    public function edit(Post $post)
+    public function edit(Location $location , Post $post)
     {
         $post = Post::findOrFail($post->id);
-        $sedes = Location::pluck('name', 'id');
-
-        return view('admin.posts.edit', compact('post', 'sedes'));
+        return view('admin.posts.edit', compact('location', 'post'));
     }
 
-    public function update(Request $request, Post $post)
+    public function update(Request $request, Location $location, Post $post)
     {
         $request->validate([
             'title'       => ['bail', 'required', 'string', 'min:5', 'max:50'],
             'slug'        => ['bail', 'required', 'string', 'min:5', 'max:100', "unique:posts,slug,$post->id"],
-            'extract'     => ['bail', 'required', 'min:10', 'max:200'],
+            'extract'     => ['bail', 'required', 'min:10'],
             'description' => ['bail', 'required', 'min:10'],
             'status'      => ['bail', 'required', 'string', 'in:active,draft,forgotten']
         ]);
 
         $post->update($request->all());
         return redirect()
-            ->route('admin.posts.show', $post)
+            ->route('admin.posts.show', [$location, $post])
             ->with('info', 'El post ha sido actualizado correctamente.');
     }
 
-    public function destroy(Post $post)
+    public function destroy(Location $location, Post $post)
     {
         /* foreach ($post->images as $image) {
             Storage::delete($image->url);
@@ -96,7 +94,7 @@ class PostController extends Controller
         ]);
 
         return redirect()
-            ->route('admin.posts.index')
+            ->route('admin.locations.show', $location)
             ->with('info', 'Publicación eliminada correctamente.');
     }
 }

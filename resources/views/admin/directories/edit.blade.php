@@ -1,9 +1,7 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-	<div class="flex items-center justify-between mb-10">
-		<h1 class="text-2xl font-bold f-montserrat text-gray-700">Editar directorio</h1>
-	</div>
+	<h3 class="font-weight-bold py-3">Editar directorio</h3>
 
 	<div>
 		{!! Form::model($directory, ['route' => ['admin.directories.update', $directory], 'method' => 'PUT']) !!}
@@ -11,8 +9,11 @@
 			@include('admin.directories.form')
 
 			<hr class="my-8">
-			<div class="flex items-center justify-end" x-data="{ submited : false }">
-				<x-form.button x-bind:disabled="submited" x-on:click="submited = true" type="submit" bg="bg-sky-500" text="Actualizar directorio" />
+			<div class="d-flex align-items-center justify-content-end" x-data="{ submited : false }">
+				<div class="d-flex align-items-center">
+					<a href="{{ route('admin.directories.index') }}" class="btn btn-sm btn-link"><i class="fas fa-arrow-left"></i> Regresar</a>
+					<button x-bind:disabled="submited" x-on:click="submited = true" class="btn btn-success ml-3" type="submit">Actualizar directorio</button>
+				</div>
 			</div>
 
 		{!! Form::close() !!}

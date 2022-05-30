@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 use App\Models\Admin\Config;
 
@@ -22,21 +23,20 @@ class ConfigController extends Controller
 
     public function update(Request $request, Config $config)
     {
-        $request->valdiate([
-            'app_name'         => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'site_description' => ['bail', 'required', 'min:3', 'string', 'max:500'],
-            'theme'            => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'category'         => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'keywords'         => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'page_icon'        => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'page_records'     => ['bail', 'required', 'min:3', 'number', 'max:90'],
-            'limit_records'    => ['bail', 'required', 'min:3', 'number', 'max:90'],
-            'site_topic'       => ['bail', 'required', 'min:3', 'string', 'max:90'],
-            'site_details'     => ['bail', 'required', 'min:3', 'string', 'max:500']
+        $request->validate([
+            'value' => ['bail', 'sometimes', 'required', 'min:1', 'max:500'],
+            'image' => ['bail', 'sometimes', 'required', 'image', 'dimensions:min_width=100,min_height=100', 'max:1024'],
         ]);
 
-        $config->update($request->all());
+        $requestData = $request->all();
+        if ($request->file('image')) {
+            if (Storage::delete($config->value)) {
+                $url = Storage::put('images', $request->file('image'));
+                $requestData['value'] = $url;
+            }
+        }
 
+        $config->update($requestData);
         return redirect()->route('admin.configs.index')->with('info', 'Configuración actualizada.');
     }
 }

@@ -14,8 +14,8 @@ class Location extends Model
         return 'slug';
     }
 
-    public function newspapers()
+    public function posts()
     {
-        return $this->hasMany('App\Models\Admin\Newspaper');
+        return $this->hasMany('App\Models\Post')->orderBy('created_at', 'desc')->limit(config('settings.limit_records'));
     }
 }

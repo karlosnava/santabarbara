@@ -1,31 +1,28 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('css')
 	<style>
-		table, tr, th, td{
-			border: 1px solid rgba(0, 0, 0, .3);
-		}
-
-		td, th{
-			padding: 10px 15px;
-		}
+		h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+		h1, h2, h3 { font-size: 25px; }
+		h4, h5, h6 { font-size: 18px; }
+		table, tr, td { border: 1px solid rgba(0, 0, 0, .3); }
+		td { padding: 5px 10px; }
 	</style>
-@endsection
+@append
 
 @section('content')
-	<div class="grid grid-cols-2 gap-5 mb-5">
-		<div><x-form.link href="{{ route('admin.posts.index') }}" bg="bg-blue-200" textcolor="text-blue-500" padding="py-5" text="Regresar" /></div>
-		<div><x-form.link href="{{ route('admin.posts.edit', $post) }}" bg="bg-green-200" textcolor="text-green-500" padding="py-5" text="Editar" /></div>
+	<div class="pt-3">
+		<a href="{{ route('admin.locations.show', $location) }}"><i class="fas fa-arrow-left"></i> Regresar</a>	
 	</div>
 
-	<div class="grid grid-cols-5 gap-5">
-		<div class="col-span-3">
-			<div class="swiper myBanner" style="height:350px!important">
+	<div class="row py-4">
+		<div class="col-12 col-md-6">
+			<div class="swiper myBanner">
 			  <div class="swiper-wrapper">
 			  	@php $totalsize = 0; @endphp
 			    @foreach($post->images as $image)
 			    	<div class="swiper-slide w-full">
-			    		<img src="{{ Storage::url($image->url) }}" class="w-full h-full object-cover object-center rounded-md">
+			    		<img src="{{ Storage::url($image->url) }}" class="img-fluid rounded-lg">
 			  		</div>
 
 			  		@php $totalsize += $image->size @endphp
@@ -37,38 +34,44 @@
 			  <div class="swiper-button-prev"></div>
 			</div>
 
-			<h1 class="my-5 font-bold text-gray-800 text-3xl">{{ $post->title }}</h1>
-			<p class="text-gray-700">{!! $post->extract !!}</p>
-			<p class="text-gray-700 mt-8">{!! $post->description !!}</p>
+			<div class="d-flex align-items-center">
+				<h1 class="my-3">{{ $post->title }}</h1>
+				<div class="ml-3">
+					<a href="{{ route('admin.posts.edit', [$location, $post]) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-pen"></i> Editar post</a>
+				</div>
+			</div>
+			<p class="text-secondary">{!! $post->extract !!}</p>
+			<hr class="my-3">
+			<p class="text-secondary">{!! $post->description !!}</p>
 		</div>
 
-		<div class="col-span-2">
-			<div class="border rounded-md mb-3 p-5">
-				<div class="text-gray-600">Publicado por:</div>
-				<div class="font-bold text-xl">{{ $post->user->name }}</div>
+		<div class="col-12 col-md-6">
+			<div class="border rounded-md mb-3 p-3">
+				<div class="text-secondary">Publicado por:</div>
+				<div class="font-bold text-lg">{{ $post->user->name }}</div>
 			</div>
-			<div class="border rounded-md mb-3 p-5">
-				<div class="text-gray-600">Vistas:</div>
-				<div class="font-bold text-xl">{{ $post->views }}</div>
+			<div class="border rounded-md mb-3 p-3">
+				<div class="text-secondary">Vistas:</div>
+				<div class="font-bold text-lg">{{ $post->views }}</div>
 			</div>
-			<div class="border rounded-md mb-3 p-5">
-				<div class="text-gray-600">Fecha de publicación:</div>
-				<div class="font-bold text-xl">{{ parseDate($post->created_at, true) }}</div>
+			<div class="border rounded-md mb-3 p-3">
+				<div class="text-secondary">Fecha de publicación:</div>
+				<div class="font-bold text-lg">{{ parseDate($post->created_at, true) }}</div>
 			</div>
-			<div class="border rounded-md mb-3 p-5">
-				<div class="text-gray-600">Última actualización:</div>
-				<div class="font-bold text-xl">{{ parseDate($post->updated_at, true) }}</div>
-			</div>
-
-			<div class="border rounded-md mb-3 p-5">
-				<div class="text-gray-600">Tamaño del post:</div>
-				<div class="font-bold text-xl">{{ parseSize($totalsize) }}</div>
+			<div class="border rounded-md mb-3 p-3">
+				<div class="text-secondary">Última actualización:</div>
+				<div class="font-bold text-lg">{{ parseDate($post->updated_at, true) }}</div>
 			</div>
 
-			<form action="{{ route('admin.posts.destroy', $post) }}" method="POST">
+			<div class="border rounded-md mb-3 p-3">
+				<div class="text-secondary">Tamaño del post:</div>
+				<div class="font-bold text-lg">{{ parseSize($totalsize) }}</div>
+			</div>
+
+			<form action="{{ route('admin.posts.destroy', [$location, $post]) }}" method="POST">
 				@csrf
 				@method('DELETE')
-				<x-form.button type="submit" bg="bg-transparent" fontsize="text-sm" textcolor="text-red-500" text="Eliminar" />
+				<button type="submit" class="btn btn-outline-danger">Eliminar post</button>
 			</form>
 		</div>
 	</div>
