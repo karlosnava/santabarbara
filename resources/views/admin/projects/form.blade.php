@@ -40,13 +40,13 @@
 
 	<div class="col-6">
 		<div class="text-secondary">
-			{!! Form::label('purpose', 'Proposito') !!}
+			{!! Form::label('reach', 'Alcance') !!}
 		</div>
 		<div class="w-100">
-			{!! Form::textarea('purpose', null, ['class' => 'form-control']) !!}
+			{!! Form::textarea('reach', null, ['class' => 'form-control']) !!}
 		</div>
 
-		@error('purpose')
+		@error('reach')
 			<small class="text-danger">{{ $message }}</small>
 		@enderror
 	</div>
@@ -108,7 +108,7 @@
     });
 
 		tinymce.init({
-      selector: '#purpose',
+      selector: '#reach',
       menubar: 'edit view insert format',
       toolbar: 'styleselect | bold italic | bullist numlist forecolor backcolor',
       plugins: 'advlist autolink link code wordcount lists hr insertdatatime table'

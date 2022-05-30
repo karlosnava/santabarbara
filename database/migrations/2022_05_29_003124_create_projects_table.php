@@ -13,13 +13,11 @@ return new class extends Migration
             $table->text('title');
             $table->text('slug');
             $table->longText('description');
-            $table->longText('purpose')->nullable();
+            $table->longText('reach')->nullable();
             $table->longText('objectives')->nullable();
             $table->text('cover');
             $table->text('status')->comment('active|inactive|draft');
             $table->unsignedBigInteger('views')->default(0);
-            $table->unsignedBigInteger('up_votes')->default(0);
-            $table->unsignedBigInteger('down_votes')->default(0);
             $table->timestamps();
         });
     }

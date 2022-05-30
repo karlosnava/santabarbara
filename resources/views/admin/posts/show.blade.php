@@ -2,15 +2,13 @@
 
 @section('css')
 	<style>
-		table, tr, th, td{
-			border: 1px solid rgba(0, 0, 0, .3);
-		}
-
-		td, th{
-			padding: 10px 15px;
-		}
+		h1, h2, h3, h4, h5, h6 { font-weight: bold; }
+		h1, h2, h3 { font-size: 25px; }
+		h4, h5, h6 { font-size: 18px; }
+		table, tr, td { border: 1px solid rgba(0, 0, 0, .3); }
+		td { padding: 5px 10px; }
 	</style>
-@endsection
+@append
 
 @section('content')
 	<div class="pt-3">

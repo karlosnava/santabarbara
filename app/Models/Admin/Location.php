@@ -16,6 +16,6 @@ class Location extends Model
 
     public function posts()
     {
-        return $this->hasMany('App\Models\Post')->orderBy('created_at', 'desc');
+        return $this->hasMany('App\Models\Post')->orderBy('created_at', 'desc')->limit(config('settings.limit_records'));
     }
 }
