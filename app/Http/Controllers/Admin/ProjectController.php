@@ -30,8 +30,8 @@ class ProjectController extends Controller
             'title'       => ['bail', 'required', 'min:5', 'max:100'],
             'slug'        => ['bail', 'required', 'min:5', 'max:120', 'unique:projects,slug'],
             'description' => ['bail', 'required', 'min:5', 'max:30000'],
-            'purpose'     => ['bail', 'sometimes', 'max:500'],
-            'objectives'  => ['bail', 'sometimes', 'max:500'],
+            'reach'       => ['bail', 'sometimes', 'max:30000'],
+            'objectives'  => ['bail', 'sometimes', 'max:30000'],
             'status'      => ['bail', 'required', 'min:5', 'max:500'],
             'cover'       => ['bail', 'required', 'image', 'max:2048'],
         ]);
@@ -62,9 +62,9 @@ class ProjectController extends Controller
             'title'       => ['bail', 'required', 'min:5', 'max:100'],
             'slug'        => ['bail', 'required', 'min:5', 'max:120', "unique:projects,slug,{$project->id}"],
             'description' => ['bail', 'required', 'min:5', 'max:30000'],
-            'purpose'     => ['bail', 'sometimes', 'max:500'],
-            'objectives'  => ['bail', 'sometimes', 'max:500'],
-            'status'      => ['bail', 'required', 'min:5', 'max:500'],
+            'reach'       => ['bail', 'sometimes', 'max:30000'],
+            'objectives'  => ['bail', 'sometimes', 'max:30000'],
+            'status'      => ['bail', 'required', 'min:5', 'max:30'],
             'cover'       => ['bail', 'image', 'max:2048'],
         ]);
 

@@ -30,7 +30,7 @@ class PostController extends Controller
         $request->validate([
             'title'       => ['bail', 'required', 'string', 'min:5', 'max:50'],
             'slug'        => ['bail', 'required', 'string', 'min:5', 'max:100', "unique:posts,slug"],
-            'extract'     => ['bail', 'required', 'min:10', 'max:200'],
+            'extract'     => ['bail', 'required', 'min:10'],
             'description' => ['bail', 'required', 'min:10'],
             'status'      => ['bail', 'required', 'string', 'in:active,draft,forgotten'],
             'images'      => ['bail', 'required']
@@ -69,7 +69,7 @@ class PostController extends Controller
         $request->validate([
             'title'       => ['bail', 'required', 'string', 'min:5', 'max:50'],
             'slug'        => ['bail', 'required', 'string', 'min:5', 'max:100', "unique:posts,slug,$post->id"],
-            'extract'     => ['bail', 'required', 'min:10', 'max:200'],
+            'extract'     => ['bail', 'required', 'min:10'],
             'description' => ['bail', 'required', 'min:10'],
             'status'      => ['bail', 'required', 'string', 'in:active,draft,forgotten']
         ]);

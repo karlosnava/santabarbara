@@ -19,11 +19,6 @@
 								<b>{{ $project->title }}</b>
 								<div>{{ $project->status }}</div>
 							</div>
-							<hr class="my-2">
-							<div class="d-flex align-items-center justify-content-between">
-								<div class="text-danger small">Votos negativos: {{ $project->down_votes }}</div>
-								<div class="text-success small">Votos positivos: {{ $project->up_votes }}</div>
-							</div>
 						</div>
 					</div>
 				</a>

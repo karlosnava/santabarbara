@@ -27,14 +27,14 @@
 				<h1 class="font-weight-bold text-center px-5">{{ $project->title }} <a href="{{ route('admin.projects.edit', $project) }}" class="btn btn-sm btn-outline-primary"><i class="fas fa-pen"></i></a></h1>
 			</div>
 
-			<div class="text-secondary w-75">{!! $project->description !!}</div>
+			<div class="w-75">{!! $project->description !!}</div>
 		</div>
 
-		@if($project->purpose)
+		@if($project->reach)
 			<div class="col-12 col-md-6">
 				<div class="bg-white border rounded-lg py-3 px-4">
-					<b>Propósitos</b>
-					<div class="text-secondary">{!! $project->purpose !!}</div>
+					<b>Alcance</b>
+					<div class="text-secondary">{!! $project->reach !!}</div>
 				</div>
 			</div>
 		@endif

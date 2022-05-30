@@ -1,7 +1,7 @@
 @php
 	$links = [
-		'Institucional' => '/',
-		'Proyectos'     =>'/',
+		''     => '',
+		'Proyectos'     => route('projects.index'),
 		'Plataforma'    => route('admin.index')
 	];
 @endphp
