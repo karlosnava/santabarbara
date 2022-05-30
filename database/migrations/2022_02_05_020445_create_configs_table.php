@@ -13,6 +13,7 @@ class CreateConfigsTable extends Migration
             $table->string('name');
             $table->string('details');
             $table->longText('value');
+            $table->text('type');
             $table->timestamps();
         });
     }

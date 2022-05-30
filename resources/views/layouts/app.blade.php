@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
 	<meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,7 +8,7 @@
 	<title>@if(View::hasSection('title')) @yield('title') | {{ config('settings.app_name') }} @else {{ config('settings.app_name') }} @endif</title>
 
 	{{-- ICONS --}}
-	<link rel="shorcut icon" href="{{ asset(config('settings.page_icon')) }}">
+	<link rel="shorcut icon" href="{{ Storage::url(config('settings.page_icon')) }}">
 
 	{{-- FONTS --}}
 	<link href="https://fonts.googleapis.com/css2?family=Montserrat&family=Roboto:wght@400;500&display=swap" rel="stylesheet"> 

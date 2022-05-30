@@ -1,23 +1,26 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-	{!! Form::open(['route' => 'admin.posts.store', 'files' => true, 'method' => 'POST']) !!}
-		<div class="grid grid-cols-5 gap-5">
-			<div class="col-span-3">
+	<form action="{{ route('admin.posts.store', $location) }}" enctype="multipart/form-data" method="POST">
+		@csrf
+
+		<div class="row py-4">
+			<div class="col-12 col-md-8">
 				@include('admin.posts.form')
+
+				<div class="d-flex align-items-center justify-content-end mt-4">
+					<button type="submit" class="btn btn-success"><i class="fas fa-plus"></i> Crear publicación</button>
+				</div>
 			</div>
 
-			<div class="col-span-2">
-
+			<div class="col-12 col-md-4">
 				<input type="file" name="images[]" id="images" accept="image/*" multiple>
+				@error('images')
+					<small class="text-danger">{{ $message }}</small>
+				@enderror
 			</div>
 		</div>
-
-		<div class="grid grid-cols-2 gap-5 mt-5">
-			<div><x-form.link href="{{ route('admin.posts.index') }}" bg="bg-red-200" textcolor="text-red-500" padding="py-5" text="Cancelar" /></div>
-			<div><x-form.button type="submit" text="Crear publicación" bg="bg-blue-200" textcolor="text-blue-500" padding="py-5" /></div>
-		</div>
-	{!! Form::close() !!}
+	</form>
 @endsection
 
 @section('js')

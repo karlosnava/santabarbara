@@ -1,56 +1,73 @@
-@extends('admin.layouts.app')
+@extends('adminlte::page')
 
 @section('content')
-	<div class="flex items-center justify-between mb-10">
-		<h1 class="text-2xl font-bold f-montserrat text-gray-700">Directorios</h1>
-		<div>
-			<x-form.link href="{{ route('admin.directories.create') }}" bg="bg-green-600" text="<i class='fas fa-plus'></i> Crear directorio" />
-		</div>
-	</div>
-	<hr class="my-4">
+	<h3 class="font-weight-bold py-3">Directorios <a href="{{ route('admin.directories.create') }}" class="btn btn-success ml-2 rounded-circle"><i class='fas fa-plus'></i></a></h3>
 
-	@foreach($directories as $directory)
-    <div class="flex items-center shadow-md rounded-md px-4 py-2 mb-4 justify-between w-full">
-      <h5 class="text-base font-bold">{{ $directory->name }} @if($directory->status == "forgotten") <span class="text-red-500 font-normal text-sm">(Oculto)</span> @endif</h5>
+	<table class="table table-striped">
+		<thead class="table-dark">
+			<tr>
+				<th>ID</th>
+				<th>Nombre</th>
+				<th>Descripción</th>
+				<th>Estado</th>
+				<th>Acciones</th>
+			</tr>
+		</thead>
 
-  		<div class="flex items-center">
-  			<a href="{{ route('admin.directories.show', $directory) }}" class="bg-white px-2 py-1 rounded-full text-gray-700 mx-1"><i class="fas fa-eye"></i></a>
-  			<a href="{{ route('admin.directories.edit', $directory) }}" class="bg-white px-2 py-1 rounded-full text-gray-700 mx-1"><i class="fas fa-pencil"></i></a>
-
-  			@if($directory->status == "forgotten")
-  				<form action="{{ route('admin.directories.reactivate', $directory) }}" method="POST">
-	  				@csrf
-	  				@method("PUT")
-	  				<div class="activateBtn flex items-center bg-white p-2 rounded-full text-gray-700 mx-1 cursor-pointer">
-	    				<i class="fas fa-arrow-up"></i>
-	  					<button type="submit" class="text-sm ml-2" style="display: none">Presiona aquí para confirmar</button>
-	  				</div>
-  			@else
-  				<form action="{{ route('admin.directories.destroy', $directory) }}" method="POST">
-	  				@csrf
-	  				@method("DELETE")
-	  				<div class="deleteBtn flex items-center bg-white p-2 rounded-full text-gray-700 mx-1 cursor-pointer">
-	    				<i class="fas fa-trash"></i>
-	  					<button type="submit" class="text-sm ml-2" style="display: none">Presiona aquí para confirmar</button>
-	  				</div>
-  			@endif
-  			</form>
-  		</div>
-  	</div>
-  @endforeach
+		<tbody>
+			@foreach($directories as $directory)
+				<tr>
+					<td>{{ $directory->id }}</td>
+					<td>{{ $directory->name }}</td>
+					<td>{{ $directory->description }}</td>
+					<td>{!! $directory->status == "active" ? "<span class='text-success'>Activo</span>" : "<span class='text-danger'>Inactivo</span>" !!}</td>
+					<td width="250px">
+						<div class="row align-items-center">
+							<div class="col">
+  							<a href="{{ route('admin.directories.show', $directory) }}"><i class="fas fa-eye"></i></a>
+							</div>
+							<div class="col">
+  							<a href="{{ route('admin.directories.edit', $directory) }}"><i class="fas fa-pen"></i></a>
+							</div>
+							<div class="col">
+								@if($directory->status == "forgotten")
+				  				<form action="{{ route('admin.directories.reactivate', $directory) }}" method="POST">
+					  				@csrf
+					  				@method("PUT")
+					  				<div class="activateBtn d-flex align-items-center">
+					    				<i class="fas fa-arrow-up" title="Activar"></i>
+					  					<button type="submit" class="small btn btn-sm btn-outline-success ml-2" style="display: none">Presiona aquí para confirmar</button>
+					  				</div>
+				  			@else
+				  				<form action="{{ route('admin.directories.destroy', $directory) }}" method="POST">
+					  				@csrf
+					  				@method("DELETE")
+					  				<div class="deleteBtn d-flex align-items-center">
+					    				<i class="fas fa-arrow-down" title="Desactivar"></i>
+					  					<button type="submit" class="small btn btn-sm btn-outline-danger ml-2" style="display: none">Presiona aquí para confirmar</button>
+					  				</div>
+				  			@endif
+				  			</form>
+							</div>
+						</div>
+					</td>
+				</tr>
+			@endforeach
+		</tbody>
+	</table>
 @endsection
 
 @section("js")
 	<script>
 		$(".deleteBtn").click(function () {
-			$(this).removeClass("text-gray-700");
-			$(this).addClass("text-red-700");
+			$(this).removeClass("text-secondary");
+			$(this).addClass("text-danger");
 			$(this).children()[1].style.display = "block";
 		});
 
 		$(".activateBtn").click(function () {
-			$(this).removeClass("text-gray-700");
-			$(this).addClass("text-green-700");
+			$(this).removeClass("text-secondary");
+			$(this).addClass("text-success");
 			$(this).children()[1].style.display = "block";
 		});
 	</script>

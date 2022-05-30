@@ -41,7 +41,7 @@ class NewsletterController extends Controller
     {
         $request->validate([
             'name' => ['bail', 'required', 'string', 'min:3', 'max:30'],
-            'slug' => ['bail', 'required', 'string', 'min:4', 'max:40', 'unique:newsletters,slug'],
+            'slug' => ['bail', 'required', 'string', 'min:4', 'max:40', "unique:newsletters,slug,{$newsletter->id}"],
             'file' => ['bail', 'nullable', 'file', 'max:4096']
         ]);
 

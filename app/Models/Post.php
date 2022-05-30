@@ -23,4 +23,9 @@ class Post extends Model
     {
         return $this->morphMany('App\Models\Image', 'imageable');
     }
+
+    public function location()
+    {
+        return $this->belongsTo('App\Models\Admin\Location');
+    }
 }

@@ -11,7 +11,7 @@ class DirectoryController extends Controller
 {
     public function index()
     {
-        $directories = Directory::all();
+        $directories = Directory::orderBy('status')->orderBy('created_at')->get();
         return view('admin.directories.index', compact('directories'));
     }
 
